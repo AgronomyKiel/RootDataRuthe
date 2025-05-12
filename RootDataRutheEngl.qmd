@@ -1,0 +1,1140 @@
+---
+title: Analysis of Root Data in Winter Wheat
+author:
+  - name: Henning Kage
+    corresponding: true
+    email: kage@pflanzenbau.uni-kiel.de
+    affiliations:
+      - Institute of Crop Science and Plant Breeding, Agronomy and Crop Science, Christian-Albrechts-University, Kiel, Germany
+keywords:
+  - Wheat
+  - Root
+date: last-modified
+bibliography: LitKage.bib
+csl: european-journal-of-agronomy.csl
+citation:
+  container-title: In preparation
+execute: 
+  echo: true
+number-sections: true
+html-math-method: katex
+format: 
+  html:
+    embed-resources: true
+toc: true
+toc-expand: 4
+toc-depth: 4
+toc-location: left
+---
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+#| warning: false
+#| include: false 
+
+rm(list=ls())
+
+library(ini)
+library(tidyverse)
+library(ggplot2)
+library(lubridate)
+library(ggsci)
+library(nlme)
+library(plyr)
+library(broom)
+mylocale <- locale()
+mylocale$decimal_mark <- "."
+mylocale$grouping_mark <- ""
+MyShapes <- c(21,22,23,24,25)
+
+```
+
+# Root length and root length density
+
+In order to estimate the water transport rate towards roots and their possible limitations it is necessary to have a realistic estimate of the total root length, its spatial an temporal variation and furthermore the distribution of water uptake over the parts of the root system. The latter point is often governed by the variation of water tension within the rooted soil layers, as during a drying phase the more densely rooted upper soil layers dry out and the water uptake than focuses on deeper soil layers.
+
+The variation total root length of a crop over time varies between crops and for a specific crop total root length is somewhat related to the total biomass production and its influencing factors. Cereal crops may have maximum total root root length values of 10 $km^2/m^2$ or in other units 100 $[cm\ cm^{-2}]$. Especially grain legumes have much lower total root length values, down to approximately 10% of the values of cereal crops, which may lead to a value of 10 $[cm\ cm^{-2}]$ [@Kage1996d]. For a rooting depth of 100 cm (cereal crop) this leads to an average root length density of 1 $[cm \cdot cm^{-3}]$ and for a lower rooting depth of a grain legume of about 50 \[cm\] we end at values of 0.2 $[cm\ cm^{-2}]$. Root length density in the subsoil, which is most important during drought stress phases, however, is much lower.
+
+## Dynamic of total root length
+
+The growth of the root system is closely linked to the growth of the entire crop and to some extend and under some conditions (drought stress, nutrient deficiency) *vice* *versa*. If the fraction of dry matter increase attributed to fine root growth, ffR, is known, the increase of total fine root length dRL/dt (cm.m-2.d-1) may simply be calculated from the total dry weight increase dWt/dt $(g \cdot m^{-2} \cdot d^{-1)}$ and the average specific root length SRL $(cm\cdot g^{-1} DM)$ [@Kage2000].
+
+$$
+\frac{dRL}{dt}=\frac{d{{W}_{t}}}{dt}\cdot {{f}_{fR}}\cdot SRL 
+$$ {#eq-dRLdt}
+
+The value of $f_{fR}$ may be assumed to be constant or to decrease during the plant’s development from the vegetative to the generative phase with a minimum value of zero. As a simple approximation a linear decrease of $f_{fR}$ with temperature sum since emergence may be assumed:
+
+$$
+f_{fR}=\max (0,\,\,{{f}_{fR0}}-{{f}_{fRdec}}\cdot TS)
+$$ {#eq-ffR}
+
+where ffR0 (-) is the initial fraction of dry matter allocated to the root fraction and ffRdec $(°C^{-1} d^{-1})$ is the decrease of this fraction per unit of accumulated temperature. The value of SRL may regarded as a parameter or be calculated from the average diameter of the roots and the average dry matter content of the roots. A constant value of 7000 $cm\cdot g^{-1}\; DM$ is used here based on data of @Barraclough1984, nevertheless, also much lower values have been reported from soils with a quite high clay content [@Siddique1990; @Savin1994].
+
+The total dry matter production rate may be estimated from the shoot dry matter increase if one considers only a fine root pool as below-ground biomass: $$
+\frac{dW_t}{dt}=\frac{1}{\left( 1-{{f}_{fR}} \right)}\frac{d{{W}_{sh}}}{dt} 
+$$ {#eq-dWtdt} Shoot dry matter increase may be obtained from a crop growth model or may be derived from an appropriate function fitted to experimental data. In this study we followed the second approach, using the Richards-function [@Thornley1990]:
+
+$$
+\frac{dW_{sh}}{dt}=r_{Ws}\cdot T_{eff} \cdot W_{sh} \cdot \left( \frac{W_{shmax}^{rf}-{W_{sh}}^{rf}}{rf\cdot W_{shmax}^{rf}} \right)
+$$ {#eq-dWshdt}
+
+Where $r_{Ws}$ is a growth rate parameter, $T_{eff}$ is the effective temperature, $W_{shmax}$ is the maximum attained shoot dry matter and rf is form parameter. This function can be integrated numerically, using a value for $W_{sh}$ at sowing of 10 $g\cdot m^{-2}$. The effective temperature was calculated from:
+
+$$
+T_{eff}=\max \left( 0,\left( {{T}_{a}}-{{T}_{b}} \right) \right) 
+$$ {#eq-Teff}
+
+Where $T_a$ is the daily average air temperature $T_b$ is a base temperature, assumed to be 4°C.
+
+## Rooting depth
+
+Rooting depth zr (cm) is often found to increase linearly with accumulated temperature sum within certain development stages, but lag phases in rooting depth increase [@ThorupKristensen1998; @ThorupKristensen1998b] as well as diminishing rooting depth increases during maturity [@Jaafar1993] have been observed. Rooting depth increase $[cm \cdot d^{-1}]$ therefore simply is:
+
+$$
+\frac{dz_r}{dt}=b_{zr}\cdot T_{eff} 
+$$ {#eq-dzrdt} Where $b_{zr}$ $[cm\cdot°C^{-1}\cdot d^{-1}]$ is a constant. The base temperature for root growth was set to 0°C.
+
+## Vertical root distribution
+
+Root length density, however, is not uniform over the soil profile. Typically it is decreasing exponentially from the highest values near the soil surface with depth [@Gerwitz1974; @Barraclough1984; @Greenwood1982]:
+
+$$
+L_{rv}=L_{rv0}\cdot {{e}^{-{{k}_{r}}\cdot z}} 
+$$ {#eq-Lrv}
+
+where the constant $k_r$ $(cm^{-1})$ is the fractional decrease in RLD per unit increase of soil depth and $L_{rv0}$ is the root length density at zero soil depth.
+
+Integration of z=0 to a depth $z=z_r$ were the root length density is very low yields the root length RL $(cm \cdot cm^{-2})$ [see @Kage2000]:
+
+$$
+L_r=\int\limits_{z=0}^{z=z_r}{L_{rv0}\cdot {{e}^{-{{k}_{r}}\cdot z}}\cdot dz}=\frac{L_{rv0}}{{{k}_{r}}}\cdot \left( 1-{{e}^{-{{k}_{r}}\cdot {{z}_{r}}}} \right) 
+$$ {#eq-Lr}
+
+To calculate the average rooting density $\overline{L_{rv}}$ $(cm \cdot cm^{-3})$ within a certain soil layer located between two soil depths z1 and z2 the above equation may be set up for both depths.The difference between RL at z2 and z1 divided by the distance z2-z1 gives the desired value of $RLD_{av}$:
+
+$$
+\overline{L_{rv}}=\frac{L_{rv0}\cdot \left( {{e}^{-{{k}_{r}}\cdot {{z}_{1}}}}-{{e}^{-{{k}_{r}}\cdot {{z}_{2}}}} \right)}{{{k}_{r}}\cdot \left( {{z}_{2}}-{{z}_{1}} \right)} 
+$$ {#eq-avLrv}
+
+At the moment $k_r$ and $L_{rv0}$ remain unknown parameters.
+
+for the depth $z=z_r$ and introducing a new parameter, $r_{RLD}$, describing the ratio of RLD at $z_r$, $RLD_{zr}$, and RLD~0~ the following identity can be found for the parameter $k_r$:
+
+$$
+{{k}_{r}}=-\frac{\ln \left( \frac{RL{{D}_{zr}}}{RL{{D}_{0}}} \right)}{{{z}_{r}}}=-\frac{\ln \left( {{r}_{RLD}} \right)}{{{z}_{r}}} 
+$$ {#eq-kr}
+
+Thereby, the introduction of $r_{RLD}$ avoids the necessity of using an iterative solution of the above set of equations.
+
+Knowing this value the root length density at the soil surface can be calculated:
+
+$$
+RLD_{0}=RL\cdot k_{r}\frac{1}{1-e^{-{k_r}\cdot z_r}} 
+$$ {#eq-RLD0}
+
+For late sown winter wheat on a loess loam soil [@Kage2001] estimated values for $L_{rv0}$ of about 4 $cm \cdot cm^{-3}$ and $K_r$ of about 0.03.
+
+```{r}
+#| label: LrvExample
+#| message: false
+#| warning: false 
+
+# Root length density at depth 0
+Lrv0 <- 4 # cm.cm-3
+
+# depth Lrv decrease parameter 
+kr <- 0.03
+
+# sequence of depths
+z <- seq(0, 150, 5)
+
+# sequence of root length densities
+Lrv <- Lrv0*exp(-kr*z)
+#plot(Lrv, -z )
+# integration over depth gives total root length per area
+Lr <- Lrv0/kr*(1-exp(-kr*max(z)))
+#cat("For these values of Lrv0 and kr the total root length is", format(Lr, digits=4), "cm/cm2.")
+
+```
+
+For these values of $L_{rv0}$ and $k_r$ the total root length is `r format(Lr, digits=4)` $cm\cdot cm^{-2}$.
+
+```{r}
+#| label: fig-LrvDepth
+#| echo: false
+#| eval: false
+#| fig.cap: "Root length density (Lrv) vs. depth"
+#| fig.height: 3.5
+#| fig.width: 3
+#| fig.align: "center"
+
+
+#plot(Lrv, -z , type = "l", ylab="depth [cm]", xlab = "Lrv [cm/cm3]")
+
+illu <- data.frame(-z, Lrv)
+
+minor_breaks <- rep(1:9, 21)*(10^rep(-10:10, each=9))
+MyBreaks <- c(1, 10, 100, 1000, 10000)
+m <- NULL
+m <-ggplot(data=illu)
+m <- m + geom_line(aes(x=Lrv, y=z),lwd=1, lty=1, color="brown")
+m <- m + scale_colour_brewer(palette="Set1")
+m <- m + scale_y_reverse()
+m <- m + scale_fill_brewer(palette="Set1")
+m <- m + scale_x_continuous(position = "top")
+m <- m + xlab("Lrv [cm/cm³]") + ylab("depth [cm]")
+#m <- set_theme(m,14)
+m <- m + theme_bw(base_size = 14)
+#ggsave(filename = "LRV_depth.png", plot=m, units="cm", dpi = 300, height=15, width=22, bg = "transparent")
+m
+
+```
+
+During a drying cycle, the water uptake front moves downward as the topsoil then is depleted of soil water and the majority of soil water uptake may take happen in a quite narrow soil volume. If we assume that all water is taken up from the soil depth 60 to 80 cm.
+
+```{r include=FALSE}
+#| label: LrvExample2
+#| echo: false
+
+
+z1 <- 60
+z2<- 80
+Lrv_av <- (Lrv0*(exp(-kr*z1)-exp(-kr*z2)))/(kr*(z2-z1))
+#cat("This gives an average root length density (Lrv) of ", format(Lrv_av, digits = 2), "cm/cm3, ")
+Lr <- Lrv_av*(z2-z1)
+#cat("and root length for water uptake (Lr) of ", format(Lr, digits = 2), "cm/cm2.")
+
+# water uptake 
+WU <- 5 # [mm/d] or [l/m²/d]
+WU <- WU*1000/1e4 # [cm³/cm²/d]
+
+# water influx rate 
+Iw <- WU/(Lr) # [cm³/cm/d] or [cm/d]
+Iwmax <- Iw*2.5
+
+```
+
+For this depth we have an average root length density ($L_{rv}$) of `r format(Lrv_av, digits = 2)` $[cm  \cdot cm^{-3}]$ and root length for water uptake $(L_r)$ of `r format(Lr, digits = 2)` $[cm  \cdot cm^{-2}]$. Therefore the water uptake per unit root length or water influx rate $I_w$ is `r format(Iw, digits = 2)` $[cm^3 \cdot cm \cdot d^{-1}]$. The peak value of water uptake around noon is about 2.5 the value of the average influx rate, $I_{w,max}$ therefore is about `r format(Iwmax, digits = 2)` $[cm \cdot d^{-1}]$.
+
+For very low values of $L_{rv}$ in combination with low unsaturated hydraulic conductivity of the soil, however, the water uptake may be limited the transport rate towards the root.
+
+# Parameterisation of simple descriptive root growth model / Analysis of root data winter wheat crop rotation experiment Ruthe 1995-1997
+
+The data originate from a crop rotation system experiment conducted at the Ruthe experimental station, located south of Hanover on a loess loam site.
+
+## Experimental design
+
+Field experiment, 4-factorial in split-plot design
+
+### Factors/Treatments
+
+1st Factor: Rotations (R) horticultural crop rotation, intensive agricultural crop rotation, extensive
+
+2nd Factor: Crop types (A) Years horticultural crop rotation, agricultural crop rotation
+
+3rd Factor: Soil cultivation (B) B1: Plow: intensive, inverting B2: Rotary tiller: extensive, mixing
+
+4th Factor: Nitrogen fertilization (N) N1: Official recommendation N2: Official recommendation - 30%
+
+3 replications
+
+N fertilisation is a sub unit of crop rotation / crop.
+
+## Methods
+
+The root data observation contains soil core and Minirhizotron method. The soil core method severed as reference method for the Minirhizotron method. The soil core data were used to determine the root length density (RLD) in cm/cm³.
+
+## Soil core data
+
+Soil cores have been taken in 15 cm intervals and root length density (RLD) has been determined from length estimates based on the Newman methods. RLD then is given per volume of soil (cm/cm³). Maximum depth of observations was 120cm.
+
+### Data import
+
+The data are available as separate csv files for the years 1995-1997. The data are read in and merged.
+
+```{r}
+#| message: false
+#| warning: false
+
+
+## soil core data ----
+
+sc <- read.csv("soilcores.csv")
+sc$Date <- as.Date(sc$Datum, origin = "1899-12-30")
+
+# rename columns and factor levels
+sc <- sc %>% dplyr::rename("Depth"="Tiefe", "Nrate"="Nduengung", "CR"="FRUFOL", "Year"="Jahr", "Depth2"="Tiefe2")
+sc <- sc %>% mutate(CR = case_when(
+  CR == "Gemüse" ~ "Veg",
+  CR == "Agrar" ~ "Ag",
+  TRUE ~ as.character(CR)
+))
+sc <- sc %>% mutate(Nrate = case_when(
+  Nrate == "ohne N" ~ "NoN",
+  Nrate == "normal" ~ "norm",
+  Nrate == "reduziert" ~ "red",
+  TRUE ~ as.character(CR)
+))
+
+sc <- sc %>% mutate(DepthStr = case_when(
+  Depth == 15 ~ "  0-15",
+  Depth == 30 ~ " 15-30",
+  Depth == 45 ~ " 30-45",
+  Depth == 60 ~ " 45-60",
+  Depth == 75 ~ " 60-75",
+  Depth == 90 ~ " 75-90",
+  Depth == 105 ~ " 90-105",
+  Depth == 120 ~ "105-120"
+))
+
+
+#sc %>% group_by(Jahr) %>% str()
+#str(sc)
+
+```
+
+The soil core data were determined on the dates: `r unique(as.Date(sc$Datum, origin="1899-12-31"))`. For the factor N fertilization, the levels were: `r unique(sc$Nduengung)`. The variant "without N" was removed from the evaluation because no minirhizotron data were collected for this treatment.
+
+```{r}
+#| echo: FALSE
+#| message: FALSE
+#| warning: FALSE
+#| label: fig-sc
+#| fig.cap: "Number of soil core data per year, depth, N fertilisation and crop rotation"
+#| fig.height: 8
+#| fig.width: 6
+#| fig.align: "center"
+
+
+## plot number of sc measurements ----
+
+p <- ggplot(data = sc, aes(x=CR, fill=Nrate))
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_bar(position = "dodge")
+p <- p + facet_grid(rows = vars(DepthStr), cols=vars(Year)  ) 
+p <- p + theme(strip.background = element_blank())
+p
+
+```
+
+```{r}
+# remove cores from plots without N fertilization
+sc <- sc[sc$Nrate!="NoN",]
+# remove data with infinite values of lnWLD
+sc2 <- sc[is.finite(sc$lnWLD),]
+
+# create factors for variance analysis of the repeated measurement split-plot design
+sc2$YearBlock <- as.factor(paste(sc2$Year,sc2$BLOCK, sep="_"))
+sc2$MainPlot <- as.factor(paste(sc2$Year, sc2$BLOCK, sc2$CR, sep="_"))
+sc2$Nrate <- factor(sc2$Nrate)
+```
+
+### Anova
+
+An analysis of variance was performed to investigate the effects of year, N fertilization and depth on log transformed root length density. It has to be noted that depth was included as a numerical variable in the model. The root length density data have been log transformed to obtain a normal distribution. The analysis of variance was performed using the `lme` function from the `nlme` package. The model includes the fixed effects of year, N fertilisation, crop rotation and depth as well as their interactions. The random effects include the block and main plot structure of the split-plot design.
+Model 1 does not consider a correction for the variance structure, model 2 considers the variance structure. The depth effects on the variance structure were considered by using a variance structure of the form varIdent.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: AnovaMix1
+## anova -----
+
+
+### without correction for depth effects on variance
+modMix1 <- lme(lnWLD ~ Year * CR * Nrate*Depth2,
+                 random = ~1|YearBlock/MainPlot,
+                 data = sc2)
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| label: AnovaMix2
+
+library(car)
+Anova(modMix1)
+```
+
+A more simplified model with only the main effects and the interaction of year and depth was fitted. The model is given below.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: AnovaMix3
+
+### with correction for year effects on variance #
+
+modMix2 <- lme(lnWLD ~ Year*Depth2+ Nrate:Depth2,
+               random = ~1|YearBlock/MainPlot,
+               data = sc2,
+               weights = varIdent(form = ~1|Depth2))
+Anova(modMix2)
+```
+
+
+
+
+
+The two models are compared using the Akaike Information Criterion (AIC). The model with the lower AIC value is usually preferred.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: AICAnovaMix1_2
+## comparison of models
+AIC(modMix1, modMix2)
+```
+
+```{r}
+summary(modMix2)
+```
+
+```{r}
+#plot(modMix2)
+```
+
+### Plot of root length density vs. depth
+
+The simple empirical model fitted in the section before is used to predict the root length density (RLD) as a function of depth and N fertilization. The model is fitted to the data and the predictions and data are plotted in @fig-sc2. The fit is not perfect, but the general assumption of a logarithmic decrease of RLD with depth is confirmed.
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-sc2
+#| fig.height: 8
+#| fig.width: 10
+#| fig.cap: "Root length densities of winter wheat at ear emergence to flowering grown in 3 consecutive years on a loess loam soil in northern Germany under  'normal' (Norm) and 'reduced' (Red) nitrogen fertilisation. Date were determined using the soil core method "
+
+# Add model predictions to the data frame
+sc2$lnWLD_pred <- predict(modMix2, newdata = sc2)
+# back transformation to non log scale
+sc2$WLD_pred <- exp(sc2$lnWLD_pred)
+
+sc_av <- sc2 %>% dplyr::group_by(Year, Nrate, Depth2) %>% dplyr::summarise(WLD = mean(WLD_pred))
+
+minor_breaks <- rep(1:9, 21)*(10^rep(-10:10, each=9))
+MyBreaks <- c(1e-7, 0.000001,0.00001,0.0001,0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000)
+
+p <- ggplot(data = sc2, aes(x=Depth2, y=WLD, fill=Nrate, color=Nrate))
+p <- p + stat_summary( fun.data="mean_cl_boot", size=0.5)
+p <- p + geom_line(data=sc_av, aes(x=Depth2, y=WLD, color=Nrate))
+#p <- p + facet_grid( cols = vars(Year), rows=vars(FRUFOL)  ) 
+  p <- p + facet_wrap( facets = vars(Year), nrow = 1  ) 
+p <- p + theme_bw(base_size = 18)
+#p <- p + scale_x_continuous(limits = c(0,120))
+p <- p + scale_y_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + scale_x_reverse(limits = c(120,0), breaks = seq(0, 120, 20))
+p <- p + scale_color_aaas()
+p <- p + xlab("Depth [cm]") + ylab("RLD [cm/cm³]")
+p <- p + scale_shape_manual(values = MyShapes)
+p <- p + coord_flip()
+#p <- p + annotation_logticks(sides = "trbl")
+p <- p + scale_fill_aaas() 
+p <- p + theme( panel.grid.minor.y = element_blank(), strip.background = element_blank() )
+p
+#ggsave(filename = "soilcorewldmod.png", width = 14, height = 7, dpi = 600)
+```
+
+## Minirhizotron data
+
+Two minirhizotron tubes made from polyacryl with an outer diameter of 4.6 cm and a total length of 180 cm were installed per plot at an angle deviating 30° from the vertical direction to avoid preferential root growth along the tubes [@bragg1983]. Root observations were directly converted into root scores according to [@Maertens1987] at the field plot. There were two view direction, each deviating 45° from the vertical and observations were made for 5 cm depth increments.  For correlation with the soil core data the score values were pooled according to the spatial aggregation of soil core data.
+
+```{r}
+mr <- read.csv("mr.csv", sep = ",", encoding = "UTF-8")
+
+mr <- mr %>% dplyr::rename("Nrate"="Nduengung", "CR"="FRUFOL", "Year"="Jahr", "Depth"="TK")
+
+mr$Date <- as.Date(mr$Datum, origin = "1899-12-30")
+mr <- mr %>% mutate(CR = case_when(
+  CR == "Gemüse" ~ "Veg",
+  CR == "Agrar" ~ "Ag",
+  TRUE ~ as.character(CR)
+))
+
+#summary(mr$Date)
+#unique(mr$Date)
+
+```
+
+The minirhizotron data show a different vertical distribution than the soil core data (@fig-sc2, @fig-mr). For the upper soil layers the relative score is lower than for the soil layers below the plow layer. This is presumably an artifact of the method. Later on the data from the minirhizotron data of the upper 30 cm are discarded. 
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-mr
+#| fig.cap: "Root length density scores of winter wheat observed in minirhizotrones from three years in northern Germany."
+
+
+illu <- mr
+illu$Year <- as.factor(illu$Year)
+illu$Termin <- as.factor(illu$Termin)
+illu <- illu %>% group_by(Year, Date, Termin, Depth) %>% dplyr::summarise(score = mean(Bonitur, na.rm=T), sd=sd(Bonitur, na.rm=T)) 
+illu$Date2 <-  format(illu$Date, "%y %b %d")
+
+
+p <- ggplot(data = illu )
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_line(aes(x=Depth, y=score, groups=Date2), color="darkgrey",size=1)
+p <- p + geom_point(aes(x=Depth, y=score, fill=Date2),shape=21, size=3)
+p <- p + coord_flip()
+p <- p + scale_x_reverse()
+p <- p + facet_wrap(facets = vars(Year), nrow = 1)
+p <- p + guides(fill=guide_legend(title="Date"))
+p <- p + theme(strip.background = element_blank())
+p <- p + xlab("Depth [cm]") + ylab("Rooting score [-]")
+p
+
+```
+
+### Dynamics of rooting depth from minirhizotron data
+
+The rooting depth was determined from the minirhizotron data. The rooting depth was calculated from the minimum rooting score for each date and depth.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: PrepareMRDateforDepthanalysis
+
+# select the minimum rooting score for each date
+mr.depth  <- illu %>% filter (score>0)%>% group_by(Termin) %>%  slice(which.min(score))
+
+# select the first date when that depth is reached
+mr.depth2 <- mr.depth %>% group_by(Year, Depth) %>% slice(which.min(Termin)) 
+
+
+# read dates of experimental activities
+ActivityDates <- read.delim("ActivityDates.csv", sep = ";", encoding = "UTF-8")
+
+# select the dates of minirhizotron observations
+mr.obs.dates <- ActivityDates %>% filter(Activity=="MRObs")
+
+# read weather data for the experimental site
+Weather <- read.csv("WeatherRuthe1994_1997.csv", sep = ";", encoding = "UTF-8")
+
+# select the dates of sowing
+SowingDates <- ActivityDates %>% filter(Activity=="Sowing")
+
+# select the sowing time for 1995
+SowingTime95 <- SowingDates[SowingDates$HarvestYear==1995,"Date"]
+
+# create dfs for temperature sum from sowing for each year
+# first for 1995
+TSum95 <- Weather %>% filter(Time>=SowingTime95, Time <= SowingTime95+300) %>% dplyr::select(Time, TMPM)
+# base temperature for rooting depth increase
+Tbase <- 0
+# temperature sum from sowing
+TSum95$Tsum <- cumsum(pmax(Tbase,TSum95$TMPM))
+TSum95$HarvestYear <- 1995
+
+# the other years
+SowingTime96 <- SowingDates[SowingDates$HarvestYear==1996,"Date"]
+TSum96 <- Weather %>% filter(Time>=SowingTime96, Time <= SowingTime96+300) %>% dplyr::select(Time, TMPM)
+Tbase <- 0
+TSum96$Tsum <- cumsum(pmax(Tbase,TSum96$TMPM))
+TSum96$HarvestYear <- 1996
+
+SowingTime97 <- SowingDates[SowingDates$HarvestYear==1997,"Date"]
+TSum97 <- Weather %>% filter(Time>=SowingTime97, Time <= SowingTime97+300) %>% dplyr::select(Time, TMPM)
+Tbase <- 0
+TSum97$Tsum <- cumsum(pmax(Tbase,TSum97$TMPM))
+TSum97$HarvestYear <- 1997
+
+# merge the data frames for all years
+TSum <- rbind(TSum95, TSum96, TSum97)
+TSum$Date <- as.Date(TSum$Time, origin = "1899-12-30")
+
+# combine the minirhizotrone data with the temperature sum data
+mr.depth <- merge(mr.depth2, TSum, by=c("Date"), all.x=TRUE)
+
+```
+
+### Linear model for rooting depth increase
+
+From the minirhizotron data we can estimate the rooting depth increase as a function of temperature sum. The rooting depth increase is assumed to be linear with temperature sum. The model is fitted to the data and the parameters are estimated.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: Modmrdepth
+
+mr.depth$Year <- as.factor(mr.depth$HarvestYear)
+
+# we assume that at sowing the rooting depth is 0 cm
+mod.zr <- lm(Depth ~ 0 + Tsum, data=mr.depth)
+summary(mod.zr)
+
+# save the parameter for the rooting depth increase
+k_zr <- coef(mod.zr)[1]
+
+```
+
+From the regression analysis we obtain the increase of rooting depth per temperature sum unit as `r round(coef(mod.zr)[1],2)` $\left[ cm^.°C^{-1}d^{-1} \right]$.
+The estimated and predicted rooting depth is shown in @fig-mrdepth.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-mrdepth
+#| fig.cap: "Rooting depth (zr) of winter wheat as a function of temperature sum (TS) since day of transplanting. Data are from three years 1995-1996 on a loess loam soil. "
+
+
+df.pred <- data.frame(Tsum = seq(0, max(mr.depth$Tsum), 10))
+df.pred$Depth <- predict(mod.zr, newdata = df.pred)
+MyShapes <- c(21,22,23,24,25)
+
+p <- ggplot(data = mr.depth)
+p <- p + theme_bw(base_size = 18)
+p <- p + geom_point(aes(x=Tsum, y=Depth, fill=Year, shape=Year), size=4)
+p <- p + geom_line(data = df.pred, aes(x=Tsum, y=Depth), color="darkgrey", size=1)
+p <- p + scale_shape_manual(values = MyShapes)
+p <- p + ylab("Rooting depth [cm]") + xlab("Temperature sum [°C]")
+#p <- p + coord_flip()
+p <- p + scale_y_reverse()
+p
+
+
+
+```
+## Calibration of minirhizotron data
+
+In order to estimate root length density from the minirhizotron data, we need to calibrate the minirhizotron data with the soil core data. The calibration is done by fitting a quadratic model without intercept to the data. 
+
+
+```{r}
+#| label: CalibrationAnalysis
+#| message: false
+#| warning: false
+#unique(mr$Date)
+#unique(sc$Date)
+# the dates of corresponding soil core data
+library(knitr)
+dates.mr.calib <- c("1995-06-13",  "1996-06-18", "1997-06-19")
+mr.calib <- mr[mr$Date %in% dates.mr.calib,]
+mr.calib <- mr.calib %>%  filter(Depth>30) %>% group_by(Year, Termin, Depth) %>%  dplyr::summarise(mean = mean(Bonitur, na.rm=T), sd=sd(Bonitur, na.rm=T)) 
+
+sc.calib <- sc %>% filter(Depth>30) %>% group_by(Year, Depth) %>% dplyr::summarise(mean.sc = mean(WLD, na.rm=T), sd.sc=sd(WLD, na.rm=T))
+
+calib <- merge(mr.calib, sc.calib, by=c("Year", "Depth"), all=TRUE)
+calib <- calib %>% filter(mean>0, mean.sc>0)
+calib$mean2 <- calib$mean^2
+
+# We choose a model with zero intercept and a quadratic term for the mean rooting score
+mod <- lm(mean.sc ~ 0 + mean + mean2, data=calib)
+```
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: TableAnovaModCalib
+#| tbl-cap: "ANOVA table for the calibration model for minirhizotron soreces to soil core root length density."
+
+kable(anova(mod))
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| label: SummaryModCalib
+#| tbl-cap: "Summary of the calibration model for minirhizotron soreces to soil core root length density."
+
+summary(mod)
+```
+
+The linear and quadratic terms of the model are estimated at `r round(coef(mod)[1],2)` and `r round(coef(mod)[2],2)`, respectively. The measured and predicted data are shown in @fig-calib. Note that the data have been averaged over all treatments.
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-calib
+#| fig.cap: "Correlation between root length density scores (rsc) from minirhizotron observations and root length density (RLD) of winter wheat from soil depths > 30 cm as determined by soil core measurements for three years on a silt loam soil."
+#| fig.height: 6
+#| fig.width: 8
+#| fig.align: "center"
+
+df.pred <- data.frame(mean = seq(0, max(calib$mean), 0.1))
+df.pred$mean2 <- df.pred$mean^2
+df.pred$mean.sc <- predict(mod, newdata = df.pred)
+calib$year <- as.factor(calib$Year)
+
+p <- ggplot()
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_point(data = calib, aes(y=mean.sc, x=mean, fill=year, shape=year), color="darkgrey", size=4)
+p <- p + geom_line(data = df.pred, aes(y=mean.sc, x=mean), color="darkgrey", size=1)
+p <- p + scale_shape_manual(values = MyShapes)
+p <- p + xlab("Rooting score [-]") + ylab("Root length density [cm/cm³]")
+p 
+
+
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| label: CombineData
+
+# make a copy of the minirhizotron data
+mr.av <- mr
+#unique(mr.av$Date)
+
+# average the minirhizotron data for date, Nrate and depth
+mr.av$Termin <- as.factor(mr.av$Termin)
+mr.av <- mr.av %>% group_by(Year, Date, Termin, Nrate, Depth) %>% dplyr::summarise(score = mean(Bonitur, na.rm=T), sd=sd(Bonitur, na.rm=T)) 
+# a date format for plotting
+mr.av$Date2 <-  format(mr.av$Date, "%d %b")
+
+# deselect all minirhizotron data from the upper 30 cm
+mr.av <- mr.av %>% filter(Depth>30)
+
+# calculated the root length density from the minirhizotron scores
+mr.av$rld = coef(mod)[1]*mr.av$score +coef(mod)[2]*mr.av$score^2
+#summary(mr.av$rld)
+
+#mr$Depth <- as.factor(mr$Depth)
+
+#unique(mr.av$Date)
+# mark the data as minirhizotron data
+mr.av$method <- "minirhizotron"
+
+# take the soil core data and rename WLD to rld
+tmp <- sc2 %>% select(Year, Date, Nrate, Depth, Date, WLD)  %>% dplyr::rename("rld"="WLD")
+tmp <- tmp %>% group_by(Year, Date, Nrate, Depth) %>% dplyr::summarise(rld = mean(rld, na.rm=T))
+# mark the data as soil core data
+tmp$method <- "soil core"
+#unique(tmp$Date)
+
+mr.av <- mr.av %>% select(Year, Nrate, Depth, Date, rld, method)
+
+# combine the minirhizotron data with the soil core data for use in parameter estimation
+rld.data <- rbind(mr.av, tmp)
+#unique(rld.data$Date)
+
+# create a depth variable with middle of the depth interval
+rld.data$Depth2 <- rld.data$Depth-15
+
+rld.data <- rld.data %>% filter(rld >0)
+
+
+# create ranks of the observation dates per year for plotting
+# create a date variable for day of the the year
+rld.data$DOY <- as.numeric(format(rld.data$Date, "%j"))
+
+library(data.table)
+
+dt <- as.data.table(rld.data)
+#dt <- dt[, .SD[sample(.N, .N)]] # reorder the rows to mimic unordered case
+dt <- dt[order(Year, DOY),]
+# without grouping
+dt[, rank :=  rleid(DOY)]
+# with grouping
+dt[, rank :=  rleid(DOY), by=Year]
+
+rld.data <- as.data.frame(dt)
+#unique(rld.data$Date)
+
+#summary(rld.data$rank)
+
+```
+
+
+The combined data for root length density from the minirhizotron and soil core data are shown in @fig-rld. The data are shown for the years 1995-1997 and for the N fertilisation levels "normal" and "reduced". The data are shown as function of depth and date. The data are shown on a log scale.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-rld
+#| fig.cap: "Root length density (RLD) in cm/cm³ as function of date and N fertilisation"
+#| fig.height: 8
+#| fig.width: 6
+#| 
+
+p <- ggplot(data = rld.data)
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_point(aes(x=Depth2, y=rld, fill=Nrate, shape=method), size=3)
+p <- p + geom_line(aes(x=Depth2, y=rld, color=Nrate, linetype = method), size=1)
+p <- p + facet_grid(cols =vars(Year), rows=vars(rank)  )
+#p <- p + facet_wrap(facets =vars(Date), ncol=3  )
+p <- p + scale_shape_manual(values = MyShapes)
+p <- p + scale_color_aaas()
+p <- p + scale_x_reverse(limits = c(120,0), breaks = seq(0, 120, 20))
+p <- p + scale_y_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + coord_flip()
+p <- p + xlab("Depth [cm]") + ylab("RLD [cm/cm³]")
+p <- p + theme(strip.background = element_blank())
+p
+
+
+```
+
+## Shoot growth
+
+For the dynamics of total root length we need the daily shoot dry matter growth rate $dW/dt$. The shoot dry matter increase was determined from the shoot dry matter data of the crop rotation experiment. The shoot dry matter data were available for the years 1995-1997. The data were read in and merged.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: ShootDM
+
+
+ShootDM <- read.delim("ShootDMWheat.csv", sep = ";", encoding = "UTF-8")
+ShootDM$Date <- as.Date(ShootDM$DOY, origin = paste0(as.character(ShootDM$Year), "-01-01"))
+ShootDM <- ShootDM %>% filter(Year > 1994)
+
+ShootDM <- merge(ShootDM, TSum[,c("Time", "Date", "Tsum")], by=c("Date"), all.x=TRUE)
+
+```
+
+In order to interpolate the measurement data we use the Richards function (@eq-dWshdt). This function is here integrated numerically using the self defined function `NumRichards`. The code is given in the library **RutheRotModelFunctions.R**.
+
+The parameter estimation has been performed previously. For sake of simplicity, here we read the parameters from a csv file. The parameters were estimated distinctively for each year and N fertilisation level. The results are stored in the data frame AllShootSim. 
+
+```{r}
+#| message: false
+#| warning: false
+#| label: ReadRparsAndPredictShootGrowth
+
+source("RutheRootModelFunctions.R")
+
+Rpars <- read.delim("DMShootRichardsPar.csv", sep = ";", encoding = "UTF-8")
+
+VecL <- length(TSum$TMPM)
+
+AllShootSim <- data.frame(Date=Date(length(VecL)), TMPM= numeric(length(VecL)),Tsum=numeric(length(VecL)), 
+                          dW_dt=numeric(length(VecL)),ShootDM=numeric(length(VecL)),
+                          ID=character(length(VecL)))
+
+for (Nrate in unique(Rpars$Fertilisation)) {
+  for (Year in unique(Rpars$Year)) {
+#    Year <- 1995
+#    Nrate <- "norm"
+    ID <- paste(Year, Nrate, sep="_")
+    ActPar <- Rpars[Rpars$Year==Year & Rpars$Fertilisation==Nrate,]
+    Wsmax <- ActPar[ActPar$Parameter=="Wsmax","value"]
+    rws <- ActPar[ActPar$Parameter=="rWs","value"]
+    rf <- ActPar[ActPar$Parameter=="rf","value"]
+    Tbase <- 4
+    df.TSum <- TSum[TSum$HarvestYear==Year,]
+    ShootSim <- NumRichards(df=df.TSum, rws=rws, Tbase=Tbase, Wsmax=Wsmax, rf=rf, ID=ID)
+    ShootSim$TMPM <- df.TSum$TMPM
+    AllShootSim <- rbind(AllShootSim, ShootSim)
+  }
+}
+
+tmp <- str_split(AllShootSim$ID, "_", n=2)
+AllShootSim$Year <- unlist(lapply(tmp, function(x) x[1]))
+AllShootSim$Nrate <- unlist(lapply(tmp, function(x) x[2]))
+
+AllShootSim <- AllShootSim %>% filter(!is.na(Tsum), !is.na(Nrate))
+
+#summary(as.factor(AllShootSim$Year))
+#summary(as.factor(ShootDM$Year))
+ShootDM <- ShootDM %>% filter(!is.na(Tsum))
+ShootDM$Nrate <- ifelse(ShootDM$Nrate=="normal", "norm", "red")
+
+
+```
+
+The simulated shoot dry matter is quite well depicted by the numerically integrated Richards function (@fig-ShootDM). Only in the year 1996 there was a an effect of N fertilisation on shoot growth. This was due to the very high soil N supply within the crop rotation where cauliflower was the previous crop in all years.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-ShootDM
+#| fig.cap: "Shoot dry matter measured (points) and predicted by a fitted Richards-equation for winter wheat with normal and reduced nitrogen fertilisation and from three consecutive years"
+
+p <- ggplot(data = AllShootSim)
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_line(aes(x=Tsum, y=ShootDM, color=Nrate), size=1)
+p <- p + geom_point(data = ShootDM, aes(x=Tsum, y=ShootDM, fill=Nrate, shape=Nrate), color="darkgrey", size=3)
+p <- p + scale_shape_manual(values = MyShapes)
+p <- p + scale_color_aaas()
+p <- p + scale_fill_aaas()
+p <- p + facet_grid(cols = vars(Year))
+p <- p + theme(strip.background = element_blank())
+p
+
+```
+
+## Helper functions
+
+The following helper functions are used to calculate the root length density (RLD) from the shoot dry matter growth rate and the specific root length. 
+
+### R Function WLD_z_t_F
+
+The function `WLD_z_t_F` (@eq-avLrv) calculates the root length density (RLD) for a given depth increment. The code is given in the file `RutheRootModelFunctions.R`. 
+
+### R function RootModDM
+
+The function `RootModDM` calculates the root length densities (RLD) over 15 cm depth increments up to 120 cm for each day of the input data frame. The code is given in the file `RutheRootModelFunctions.R`. An example for the application of the function is given in the following code chunk. 
+
+```{r}
+
+source("RutheRootModelFunctions.R")
+
+# paramter values
+k_zb	<- 	0.107 # [cm.°C*d-1]
+Ratio	<- 0.01731 # [-]	
+sp_WL	<- 	7000 # [cm.gDM-1]
+zr_0	<- 	2 # [cm]
+zrmax	<- 	160 # [-]
+Tbase <- 0 # [°C]
+fFineRoot0	<-	0.653
+fFineRootDec	<-	0.000501
+
+
+df <- AllShootSim %>% filter(Nrate=="norm", Year==1995) %>% 
+  dplyr::select(Date, TMPM, Tsum, dW_dt,  ShootDM, ID) %>% 
+  mutate(zr=0, f_root=0, dWt_dt=0, DM_root=0, WL=0, rld_15=0, rld_30=0, rld_45=0,
+         rld_60=0, rld_75=0, rld_90=0, rld_105=0, rld_120=0)
+
+test <- RootModDM (df, Tbase, zrmax, k_zb, Ratio, fFineRoot0, fFineRootDec, sp_WL )
+
+```
+
+As an example the root length density (RLD) is shown for the year 1995 and N fertilisation level "normal" (@fig-RootModDMTest). The data are shown for the depth increments of 15 cm. The data are shown as function of date and depth.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-RootModDMTest
+#| fig.cap: "Root length density (RLD) in cm/cm³ as function of date and depth. The data are simulated with the RootModDM function. The data are shown for the year 1995 and N fertilisation level 'normal'."
+#| fig.height: 6
+#| fig.width: 8
+#| fig.align: "center"
+
+illu <- test %>% pivot_longer(cols = c(rld_15, rld_30, rld_45, rld_60, rld_75, rld_90, rld_105, rld_120), names_to = "Depth", names_prefix = "rld_", values_to = "rld")
+illu$Depth <- as.numeric(illu$Depth)
+illu$Depth <- illu$Depth - 7.5
+illu$Depth <- as.factor(illu$Depth)
+
+p <- ggplot(data = illu)
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_line(aes(x=Date, y=rld, color=Depth), size=1)
+p <- p + scale_color_aaas()
+#p <- p + scale_fill_aaas()
+p <- p + scale_x_date(date_labels = "%d %b")
+p <- p + xlab("Date") + ylab("Root length density [cm/cm³]")
+p
+
+
+```
+
+### R function wrapper.RootModDM
+
+In order to fit the model to the data we need to define a wrapper function for the `nls` function.  The wrapper function is defined in the file `RutheRootModelFunctions.R`. The following code chunk shows the application of the wrapper function. It returns a vector with the simulated root length density (RLD) for each observation date and depth. 
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: wrapper.RootModDM
+
+rld.data$obsIDs <- paste(rld.data$Nrate, rld.data$Date, rld.data$Depth, sep="_")
+rld.data <- rld.data %>% arrange(unique(obsIDs))
+
+fFineRoot0 <- 0.653
+fFineRootDec <- 0.000501
+Ratio <- 0.0125
+
+
+
+fits <- nls.wrapper.RootModDM(df_ext=AllShootSim,
+                          Tbase=Tbase, 
+                          zrmax= 180, 
+                          k_zb=k_zb, 
+                          Ratio=Ratio, 
+                          fFineRoot0= fFineRoot0, 
+                          fFineRootDec=fFineRootDec, 
+                          sp_WL=7000)
+
+#fits$year <- as.factor(year(fits$Date))
+#fits$Depth <- as.numeric(fits$Depth)
+#p <- ggplot(data=fits)
+#p <- p + theme_bw(base_size = 16)
+#p <- p + geom_point(aes(x=Depth, y=rld), size=3)
+#p <- p + coord_flip()
+#p <- p + scale_x_reverse(limits = c(120,0), breaks = seq(0, 120, 20))
+#p <- p + scale_y_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+#p <- p + facet_grid( cols=vars(year), rows=vars(Nrate))
+#p
+
+
+```
+The simulated root length density (RLD) is shown in @fig-RootModDMTest2. With the default parameters, the fit is not perfect.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-RootModDMTest2
+#| fig.cap: "Mesured vs. simulated Root length density (RLD) in cm/cm³. The data are simulated with the RootModDM function."
+
+
+illu <- data.frame(fit=fits, meas=rld.data$rld, obsIDs=rld.data$obsIDs)
+
+p <- ggplot(data = illu)
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_point(aes(x=fit, y=meas), size=3)
+p <- p + geom_abline(intercept = 0, slope = 1, color="darkgrey", size=1)
+p <- p + scale_x_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + scale_y_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + xlab("Measured RLD [cm/cm³]") + ylab("Simulated RLD [cm/cm³]")
+p <- p + scale_color_aaas()
+p <- p + scale_fill_aaas()
+p
+
+
+```
+# Optimisation of model parameters
+
+The model parameters are subject to further optimisation. The parameters are estimated by minimising the sum of squares of the differences between the measured and simulated root length density (RLD). The optimisation is done with either the `nls` or the `optim` function. For both approaches additionally wrapper functions had to be defined. The wrapper functions are defined in the file `RutheRootModelFunctions.R`. 
+
+## NLS based optimisation
+
+The `nls` algorithm is based on derivatives and is  sensitive to the starting values. As an example only the optimisation of the parameter `Ratio` is shown. 
+Tests with more parameters were not very successful yet. 
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: nls.optimisation
+
+
+
+nls.control(minFactor = 1/2048)
+Meas <- rld.data$rld
+# Re-fit the model with artificial changed parameters ###########
+
+RootMod.nls<- nls(formula = Meas~nls.wrapper.RootModDM(df_ext=AllShootSim, 
+                                                   Tbase=Tbase,
+                                                   zrmax=140,
+                                                   k_zb=k_zb,
+                                                   Ratio=Ratio, 
+                                                   fFineRoot0=fFineRoot0, 
+                                                   fFineRootDec = fFineRootDec, 
+                                                   sp_WL=7000),
+                  data = list(Meas), 
+                  start = list(Ratio=Ratio ) )
+
+
+# ,  fFineRoot0=1.01*fFineRoot0,fFineRootDec=1.01*fFineRootDec
+
+
+
+summary(RootMod.nls)
+Ratio <- summary(RootMod.nls)$coefficients[1]
+
+```
+
+After the optimisation of the parameter `Ratio`, the new results are  shown in @fig-RootModDMTest3. The fit is slightly better than before.
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-RootModDMTest4
+#| fig.cap: "Root length density (RLD) in cm/cm³ as function of date and depth. The data are simulated with the RootModDM function. The data are shown for the year 1995 and N fertilisation level 'normal'."
+
+fits <- nls.wrapper.RootModDM(df_ext=AllShootSim,
+                          Tbase=Tbase, 
+                          zrmax= 140, 
+                          k_zb=k_zb, 
+                          Ratio=Ratio, 
+                          fFineRoot0= fFineRoot0, 
+                          fFineRootDec=fFineRootDec, 
+                          sp_WL=7000)
+
+
+illu <- data.frame(fit=fits, meas=rld.data$rld, obsIDs=rld.data$obsIDs)
+
+p <- ggplot(data = illu)
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_point(aes(x=meas, y=fit), size=3)
+p <- p + geom_abline(intercept = 0, slope = 1, color="darkgrey", size=1)
+p <- p + scale_x_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + scale_y_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + xlab("Measured RLD [cm/cm³]") + ylab("Simulated RLD [cm/cm³]")
+p <- p + scale_color_aaas()
+p <- p + scale_fill_aaas()
+p
+
+
+  
+```
+
+## optim Optimisation 
+
+The `optim` function is a general purpose optimisation function. The default optimisation algorithm is the Nelder-Mead simplex algorithm. The function is not as sensitive to the starting values. The function is here be for the optimisation of the paramters `Ratio`, `fFineFoot0` and `fFineRootDec`.
+The optim function is expecting a single value for the objective to be minimised. For this the wrapper function `optim.wrapper.RootModDM` is defined in the file `RutheRootModelFunctions.R`. The objective value is calculated from the sum of the squared differences between the logarithms of the measured and simulated root length density (RLD). 
+
+
+```{r}
+#| message: false
+#| warning: false
+#| label: optim.optimisation
+
+params <- vector()
+params[1] <- Ratio
+params[2] <- fFineRoot0
+params[3] <- fFineRootDec
+
+Objective <- optim.wrapper.RootModDM(params)
+
+
+#result <- optim(par = params, fn = optim.wrapper.RootModDM, method = "SANN")
+result <- optim(par = params, fn = optim.wrapper.RootModDM)
+
+Ratio_save <- result$par[1]
+fFineRoot0_save <- result$par[2]
+fFineRootDec_save <- result$par[3]
+
+result
+
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| label: fig-RootModDMTest3
+#| fig.cap: "Root length density (RLD) in cm/cm³ as function of date and depth. The data are simulated with the RootModDM function. The data are shown for the year 1995 and N fertilisation level 'normal'."
+
+Ratio <- result$par[1]
+fFineRoot0 <- result$par[2]
+fFineRootDec <- result$par[3]
+
+#Ratio <- Ratio_save
+#fFineRoot0 <- fFineRoot0_save
+#fFineRootDec <- fFineRootDec_save
+
+
+fit <- nls.wrapper.RootModDM(df_ext=AllShootSim,
+                          Tbase=Tbase, 
+                          zrmax= 140, 
+                          k_zb=k_zb, 
+                          Ratio=Ratio, 
+                          fFineRoot0= fFineRoot0, 
+                          fFineRootDec=fFineRootDec, 
+                          sp_WL=7000)
+
+illu <- data.frame(fit=fit, meas=rld.data$rld, obsIDs=rld.data$obsIDs)
+p <- ggplot(data = illu)
+p <- p + theme_bw(base_size = 16)
+p <- p + geom_point(aes(x=meas, y=fit), size=3)
+p <- p + geom_abline(intercept = 0, slope = 1, color="darkgrey", size=1)
+p <- p + scale_x_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + scale_y_log10(breaks = MyBreaks, minor_breaks=minor_breaks)
+p <- p + xlab("Measured RLD [cm/cm³]") + ylab("Simulated RLD [cm/cm³]")
+p <- p + scale_color_aaas()
+p <- p + scale_fill_aaas()
+p
+
+
+
+```
+
+# References

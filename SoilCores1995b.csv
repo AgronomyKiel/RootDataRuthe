@@ -1,0 +1,190 @@
+﻿Datum;PaNr;Tiefe;Raster;Schnittpunkte;WLD;BLOCK;FRUFOL;KULTUR1;KULTUR2;BOBE;Nduengung;Vord
+34870;11;15;9;271;2.542;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;30;7.5;347;2.712;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;45;5;164;0.855;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;60;7.5;258;2.016;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;75;1;290;0.302;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;90;5;202;1.053;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;105;5;131;0.683;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;120;2.5;199;0.518;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;11;15;5;217;1.131;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;11;30;7.5;283;2.212;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;11;45;7.5;196;1.532;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;11;60;9;126;1.182;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;11;75;2.5;220;0.573;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;11;90;1;225;0.234;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;11;105;1;59;0.061;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;11;120;1;9;0.009;1;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;16;15;7.5;181;1.415;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;30;9;321;3.011;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;45;1;173;0.18;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;60;5;175;0.912;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;75;2.5;241;0.628;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;90;1;123;0.128;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;105;1;207;0.216;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;120;1;134;0.14;1;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;16;15;7.5;202;1.579;1;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;16;30;5;252;1.313;1;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;16;45;2.5;260;0.677;1;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;16;60;2.5;330;0.86;1;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;16;75;2.5;247;0.643;1;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;16;105;1;203;0.212;1;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;16;120;1;147;0.153;1;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;20;15;9;430;4.033;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;30;5;225;1.172;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;45;2.5;192;0.5;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;60;1;120;0.125;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;75;1;149;0.155;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;90;1;207;0.216;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;105;1;214;0.223;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;120;1;155;0.162;1;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;20;15;7.5;296;2.313;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;20;30;7.5;289;2.259;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;20;45;2.5;172;0.448;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;20;60;5;203;1.058;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;20;75;1;173;0.18;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;20;90;1;285;0.297;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;20;105;1;117;0.122;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;20;120;1;153;0.159;1;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;23;15;2.5;372;0.969;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;30;7;241;1.758;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;45;2.5;137;0.357;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;60;1;196;0.204;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;75;1;194;0.202;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;90;2.5;102;0.266;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;105;1;187;0.195;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;120;1;105;0.109;1;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;23;15;7.5;265;2.071;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;23;30;9;314;2.945;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;23;45;1;117;0.122;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;23;60;1;143;0.149;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;23;75;1;223;0.232;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;23;90;2.5;139;0.362;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;23;105;1;120;0.125;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;23;120;1;197;0.205;1;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;28;15;9;267;2.504;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;30;5;201;1.047;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;45;1;366;0.381;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;60;1;107;0.112;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;75;1;165;0.172;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;90;1;93;0.097;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;105;1;19;0.02;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;120;1;19;0.02;2;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;28;15;7.5;241;1.884;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;28;30;5;238;1.24;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;28;45;1;172;0.179;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;28;60;1;202;0.211;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;28;75;5;102;0.531;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;28;90;2.5;238;0.62;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;28;105;1;94;0.098;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;28;120;1;26;0.027;2;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;29;15;2.5;287;0.748;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;30;7.5;229;1.79;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;45;5;224;1.167;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;60;2.5;152;0.396;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;75;1;169;0.176;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;90;1;217;0.226;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;105;1;106;0.11;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;120;1;149;0.155;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;29;15;9;370;3.47;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;29;30;2.5;277;0.722;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;29;45;2.5;230;0.599;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;29;60;2.5;187;0.487;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;29;75;1;138;0.144;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;29;90;1;118;0.123;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;29;105;1;123;0.128;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;29;120;1;97;0.101;2;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;33;15;;;.;2;Gemüse;Weizen;Spinat;Pflug;ohne N;
+34870;33;30;;;.;2;Gemüse;Weizen;Spinat;Pflug;ohne N;
+34870;33;45;9;295;2.767;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;33;60;2.5;324;0.844;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;33;75;2.5;297;0.774;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;33;90;1;214;0.223;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;33;105;2.5;133;0.346;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;33;120;5;187;0.974;2;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;33;15;9;291;2.729;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;33;30;5;293;1.527;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;33;45;2.5;206;0.537;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;33;60;1;204;0.213;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;33;75;5;267;1.391;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;33;90;1;163;0.17;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;33;105;1;47;0.049;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;33;120;1;37;0.039;2;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;34;15;9;372;3.489;2;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;34;30;;;.;2;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;34;60;1;54;0.056;2;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;34;75;5;84;0.438;2;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;34;90;1;77;0.08;2;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;34;105;2.5;105;0.274;2;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;34;120;1;161;0.168;2;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;34;15;2.5;297;0.774;2;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;34;30;1;293;0.305;2;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;34;45;1;336;0.35;2;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;34;60;1;129;0.134;2;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;34;75;1;181;0.189;2;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;34;90;1;110;0.115;2;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;34;120;;;0;2;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;15;;;.;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;30;1;344;0.358;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;45;1;233;0.243;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;60;1;81;0.084;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;75;1;137;0.143;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;90;1;117;0.122;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;105;1;136;0.142;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;120;1;53;0.055;3;Agrar;WWeizen;Senf;Pflug;ohne N;Red
+34870;55;15;7.5;275;2.149;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;30;1;261;0.272;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;45;1;95;0.099;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;60;1;225;0.234;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;75;1;105;0.109;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;90;1;75;0.078;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;105;1;116;0.121;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;55;120;1;86;0.09;3;Agrar;WWeizen;Senf;Pflug;Off.-30%;Red
+34870;60;15;1;283;0.295;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;30;1;196;0.204;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;45;2.5;276;0.719;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;60;;;.;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;75;1;178;0.185;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;90;1;93;0.097;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;105;1;91;0.095;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;120;1;47;0.049;3;Agrar;WWeizen;Senf;Pflug;ohne N;Offi
+34870;60;15;2.5;277;0.722;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;60;30;2.5;243;0.633;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;60;45;1;150;0.156;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;60;60;1;64;0.067;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;60;75;1;161;0.168;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;60;90;1;49;0.051;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;60;105;1;37;0.039;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;60;120;1;21;0.022;3;Agrar;WWeizen;Senf;Pflug;Offizialempfehlung;Offi
+34870;73;15;2.5;266;0.693;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;30;2.5;285;0.742;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;45;2.5;241;0.628;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;60;1;260;0.271;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;75;1;310;0.323;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;90;;;;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;105;;;;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;120;;;;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Red
+34870;73;15;5;233;1.214;3;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;73;30;1;288;0.3;3;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;73;45;5;246;1.282;3;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;73;60;1;173;0.18;3;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;73;75;1;136;0.142;3;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;73;105;1;176;0.183;3;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;73;120;1;171;0.178;3;Gemüse;Weizen;Spinat;Pflug;Off.-30%;Red
+34870;74;15;7.5;219;1.712;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;30;2.5;269;0.701;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;34;45;1;141;0.147;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;45;1;172;0.179;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;60;1;277;0.289;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;75;1;119;0.124;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;90;1;143;0.149;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;105;1;87;0.091;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;120;1;162;0.169;3;Gemüse;Weizen;Spinat;Pflug;ohne N;Offi
+34870;74;15;5;201;1.047;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;74;30;5;242;1.261;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;74;45;1;62;0.065;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;74;60;1;148;0.154;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;74;75;1;399;0.416;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;74;90;1;133;0.139;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;74;105;1;58;0.06;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi
+34870;74;120;1;146;0.152;3;Gemüse;Weizen;Spinat;Pflug;Offizialempfehlung;Offi

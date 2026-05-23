@@ -1,4 +1,7 @@
 ---
+project:
+  type: website
+  output-dir: docs
 title: Analysis of Root Data in Winter Wheat
 author:
   - name: Henning Kage
